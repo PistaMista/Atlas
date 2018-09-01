@@ -7,33 +7,20 @@ namespace Atlas
 {
     public class Program
     {
-        public struct Data
-        {
-            public string name;
-            public int number;
-        }
         static void Main(string[] args)
         {
             Console.WriteLine("Hello!");
 
-            Data data;
+            Console.Read();
+        }
 
-            Console.WriteLine("Name: ");
-            data.name = Console.ReadLine();
-            do
-            {
-                Console.WriteLine("Number: ");
-            } while (!int.TryParse(Console.ReadLine(), out data.number));
+        public static void Write(string s, ConsoleColor color)
+        {
+            ConsoleColor start_color = Console.ForegroundColor;
 
-
-
-            FileStream stream = File.Create("test.txt");
-            XmlSerializer serializer = new XmlSerializer(typeof(Data));
-
-            serializer.Serialize(stream, data);
-
-            stream.Flush();
-            stream.Close();
+            Console.ForegroundColor = color;
+            Console.Write(s);
+            Console.ForegroundColor = start_color;
         }
     }
 }
