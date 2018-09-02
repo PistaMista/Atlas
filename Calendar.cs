@@ -85,32 +85,42 @@ namespace Atlas
             {
                 if (i >= 0 && i < options.Length)
                 {
-                    if (i == currentPosition)
-                    {
-                        ConsoleColor prevColor = Console.ForegroundColor;
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(options[i].ToLongDateString());
-                        Console.ForegroundColor = prevColor;
-                    }
-                    else Console.WriteLine(options[i].GetMenuString());
+                    bool selected = i == currentPosition;
+                    Program.Write(options[i].GetMenuString(selected), selected ? ConsoleColor.Green : ConsoleColor.White);
+                    Console.WriteLine();
                 }
                 else
                 {
-                    Console.WriteLine("");
+                    Console.WriteLine();
                 }
             }
         }
 
-        static string GetMenuString(this DateTime x)
+        static string GetMenuString(this DateTime x, bool selected)
         {
-            switch (browsing)
+            if (selected)
             {
-                case Layer.YEAR:
-                    return x.Year.ToString();
-                case Layer.MONTH:
-                    return x.Month.ToString() + " " + x.Year.ToString();
-                case Layer.DAY:
-                    return x.Day.ToString() + ". " + x.DayOfWeek.ToString();
+                switch (browsing)
+                {
+                    case Layer.YEAR:
+                        return x.ToString("yyyy");
+                    case Layer.MONTH:
+                        return x.ToString("MMMM, yyyy");
+                    case Layer.DAY:
+                        return x.ToString("d. dddd, MMMM yyyy");
+                }
+            }
+            else
+            {
+                switch (browsing)
+                {
+                    case Layer.YEAR:
+                        return x.ToString("yyyy");
+                    case Layer.MONTH:
+                        return x.ToString("MMMM");
+                    case Layer.DAY:
+                        return x.ToString("d. dddd");
+                }
             }
 
             return x.ToLongDateString();
