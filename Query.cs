@@ -34,6 +34,16 @@ namespace Atlas
             return options[Display<T>(options)].Item3;
         }
 
+        public static int NumberRange(int lower_bound, int upper_bound)
+        {
+            while (true)
+            {
+                Console.WriteLine(lower_bound.ToString() + " to " + upper_bound.ToString() + ": ");
+                int result;
+                if (int.TryParse(Console.ReadLine(), out result) && result >= lower_bound && result <= upper_bound) return result;
+            }
+        }
+
 
     }
 }

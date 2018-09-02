@@ -57,7 +57,7 @@ namespace Atlas
         }
         static void RefreshOptions()
         {
-            options = new DateTime[browsing == Layer.YEAR ? 100 : (browsing == Layer.MONTH ? 12 : DateTime.DaysInMonth(date.Year, date.Month))];
+            options = new DateTime[browsing == Layer.YEAR ? 8 : (browsing == Layer.MONTH ? 12 : DateTime.DaysInMonth(date.Year, date.Month))];
 
             for (int i = 0; i < options.Length; i++)
             {

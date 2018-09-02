@@ -21,7 +21,7 @@ namespace Atlas
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Hello!");
+                Schedule.DisplaySchedule();
                 Query.Dialog(
                     new Tuple<string, string, Action>[]
                     {
