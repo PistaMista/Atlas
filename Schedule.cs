@@ -5,9 +5,9 @@ using System.Xml.Serialization;
 
 namespace Atlas
 {
-    static class Schedule
+    public static class Schedule
     {
-        struct Subject
+        public struct Subject
         {
             public readonly string name;
             public readonly string short_name;
@@ -29,20 +29,14 @@ namespace Atlas
         static Subject[][] schedule;
         public static void Load()
         {
-
             Console.WriteLine("Loading schedule and subjects.");
+            XmlSerializer serializer = new XmlSerializer(typeof(Subject[][]));
+            FileStream stream = File.Open("data/schedule.txt", FileMode.Open);
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Subject[][]));
-
-                FileStream stream = File.Open("data/schedule.txt", FileMode.Open);
                 Subject[][] data = (Subject[][])serializer.Deserialize(stream);
-
                 subject_palette = data.First();
                 schedule = data.Skip(1).ToArray();
-
-                stream.Dispose();
-                stream.Close();
             }
             catch
             {
@@ -54,7 +48,9 @@ namespace Atlas
                     schedule[i] = new Subject[0];
                 }
             }
-
+            stream.Dispose();
+            stream.Close();
+            Save();
         }
         public static void LaunchGUI()
         {
