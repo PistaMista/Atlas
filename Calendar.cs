@@ -14,7 +14,7 @@ namespace Atlas
         static Layer browsing;
         static DateTime[] options;
         static DateTime date;
-        public static void Launch()
+        public static void LaunchGUI()
         {
             date = DateTime.Today.Date;
             browsing = Layer.DAY;
@@ -38,6 +38,7 @@ namespace Atlas
                     int new_layer = (int)browsing + horizontal;
                     if (new_layer > 2)
                     {
+                        Task.ViewDay(date);
                         break;
                     }
                     else if (new_layer < 0)

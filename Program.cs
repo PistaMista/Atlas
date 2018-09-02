@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using System.Net;
 
 namespace Atlas
 {
@@ -18,6 +17,7 @@ namespace Atlas
         static void Main(string[] args)
         {
             Console.Title = "Atlas";
+            Schedule.Load();
             while (true)
             {
                 Console.Clear();
@@ -25,7 +25,8 @@ namespace Atlas
                 Query.Dialog(
                     new Tuple<string, string, Action>[]
                     {
-                        new Tuple<string, string, Action>("calendar", "Opens the timeline calendar view.", Calendar.Launch),
+                        new Tuple<string, string, Action>("calendar", "Opens the timeline calendar view.", Calendar.LaunchGUI),
+                        new Tuple<string, string, Action>("manager", "Manage subjects and the schedule.", Schedule.LaunchGUI),
                         new Tuple<string, string, Action>("tasks", "Shows all days with scheduled tasks.", () => { })
                     }
                 );
